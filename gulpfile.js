@@ -9,11 +9,11 @@ const
   sources = {
     styles: 'src/styles',
     html: 'src/index.html',
-    assets: 'assets/',
+    assets: 'img/pageAssets/',
     dist: 'dist/'
   };
 
-// Styles
+// Styles.
 gulp.task('less', function () {
   return gulp.src(sources.styles + '/style.less')
     .pipe(sourceMaps.init())
@@ -24,14 +24,20 @@ gulp.task('less', function () {
     .pipe(browserSync.stream());
 });
 
-// HTML
-gulp.task('html', ['less'], function () {
+// Assets.
+gulp.task('assets', function () {
+  return gulp.src([sources.assets + '**/*.png', sources.assets + '**/*.ico'])
+    .pipe(gulp.dest(sources.dist))
+});
+
+// HTML.
+gulp.task('html', function () {
   return gulp.src(sources.html)
     .pipe(gulp.dest(sources.dist))
 });
 
 // Static Server + watching less/html files
-gulp.task('serve', ['less', 'html'], function() {
+gulp.task('serve', ['less', 'html', 'assets'], function() {
 
   browserSync.init({
     server: "./dist"
@@ -39,6 +45,8 @@ gulp.task('serve', ['less', 'html'], function() {
 
   gulp.watch("src/styles/*.less", ['less']);
   gulp.watch("src/*.html", ['html']).on('change', browserSync.reload);
+  gulp.watch(sources.assets + '**/*.*', ['assets'])
 });
 
+// Default task.
 gulp.task('default', ['serve']);
