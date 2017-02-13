@@ -1,0 +1,98 @@
+/*=================================
+ * General Header
+ *=================================
+ */
+
+.Header {
+  height: 2rem;
+  border: solid 1px black;
+}
+
+
+
+/*=================================
+ * Menu
+ *=================================
+ */
+
+.Menu {
+
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  cursor: pointer;
+
+  &:before {
+    content: 'x';
+  }
+
+  &.isClosed {
+
+    .Menu-frame {
+      .DropdownClosed;
+    }
+  }
+}
+
+/*=================================
+ * Language
+ *=================================
+ */
+.Language {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  float: right;
+  cursor: pointer;
+  display: inline-block;
+
+  &:before {
+    content: "🢓";
+    text-align: center;
+    vertical-align: bottom;
+    line-height: 60%;
+    text-shadow: .3px .8px .5px  rgba(0,0,0,.7);
+  }
+
+  &.isOpen {
+    .Language-item {
+      display: block;
+    }
+  }
+
+  &-item {
+    line-height: 16px;
+    padding-bottom: 2px;
+    display: inline;
+
+    &:not(.isSelected) {
+      display: none;
+    }
+  }
+
+}
+
+
+/*=================================
+ * Logo
+ *=================================
+ */
+.Logo {
+  display: inline-block;
+  h1 {
+    margin: 0;
+  }
+}
+
+
+
+/*=================================
+ * Utils
+ *=================================
+ */
+.DropdownClosed() {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+}

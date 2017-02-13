@@ -4,6 +4,7 @@ const
   browserSync = require('browser-sync'),
   sourceMaps = require('gulp-sourcemaps'),
   minCss = require('gulp-clean-css'),
+  plumber = require('gulp-plumber'),
 
   // Paths to the different sources and destinations.
   sources = {
@@ -17,6 +18,7 @@ const
 gulp.task('less', function () {
   return gulp.src(sources.styles + '/style.less')
     .pipe(sourceMaps.init())
+    .pipe(plumber())
     .pipe(less())
     .pipe(minCss())
     .pipe(sourceMaps.write('./maps'))
