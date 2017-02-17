@@ -1,18 +1,49 @@
 const
-	gulp = require('gulp'),
-  less = require('gulp-less'),
+  gulp        = require('gulp'),
+  less        = require('gulp-less'),
   browserSync = require('browser-sync'),
-  sourceMaps = require('gulp-sourcemaps'),
-  minCss = require('gulp-clean-css'),
-  plumber = require('gulp-plumber'),
+  sourceMaps  = require('gulp-sourcemaps'),
+  minCss      = require('gulp-clean-css'),
+  plumber     = require('gulp-plumber'),
+  browserify  = require('browserify'),
+  babelify    = require('babelify'),
+  source      = require('vinyl-source-stream'),
+  gutil       = require('gulp-util'),
+  buffer      = require('vinyl-buffer'),
+  uglify      = require('gulp-uglify');
 
   // Paths to the different sources and destinations.
   sources = {
     styles: 'src/styles',
+    js: 'src/js/',
     html: 'src/index.html',
     assets: 'img/pageAssets/',
     dist: 'dist/'
   };
+
+// Lets bring es6 to es5 with this.
+// Babel - converts ES6 code to ES5 - however it doesn't handle imports.
+// Browserify - crawls your code for dependencies and packages them up
+// into one file. can have plugins.
+// Babelify - a babel plugin for browserify, to make browserify
+// handle es6 including imports.
+gulp.task('es6', function() {
+  return browserify({
+    entries: sources.js + 'main.js',
+    debug: true
+  })
+    .transform("babelify", { presets: ['es2015'] })
+    .on('error',gutil.log)
+    .bundle()
+    .pipe(plumber())
+    .pipe(source('bundle.js'))
+    .on('error',gutil.log)
+    .pipe(buffer())
+    .pipe(sourceMaps.init())
+    .pipe(uglify())
+    .pipe(sourceMaps.write('./maps'))
+    .pipe(gulp.dest(sources.dist));
+});
 
 // Styles.
 gulp.task('less', function () {
@@ -39,14 +70,15 @@ gulp.task('html', function () {
 });
 
 // Static Server + watching less/html files
-gulp.task('serve', ['less', 'html', 'assets'], function() {
+gulp.task('serve', ['less', 'html', 'assets', 'es6'], function() {
 
   browserSync.init({
     server: "./dist"
   });
 
+  gulp.watch("src/js/**/*.js",['es6']).on('change', browserSync.reload);
   gulp.watch("src/styles/*.less", ['less']);
-  gulp.watch("src/*.html", ['html']).on('change', browserSync.reload);
+  gulp.watch("src/index.html", ['html']).on('change', browserSync.reload);
   gulp.watch(sources.assets + '**/*.*', ['assets'])
 });
 
