@@ -1,38 +1,61 @@
-class Header {
+class Menu {
 
   constructor() {
-    this.Menu = {
-      state: false,
-      el: document.querySelector('.Menu')
-    };
-
-    console.log(this.Menu.el);
-    
+    this.state =  false;
+    this.el = document.querySelector('.Menu');
 
     // Attach handle menu event to menu.
-    this.Menu.el.onclick = () => {
-      this.Menu.state = !this.Menu.state;
+    this.el.onclick = () => {
+      this.state = !this.state;
 
-      switch (this.Menu.state) {
-        case true:
-          this.menuOpen();
-          break;
-        case false:
-          this.menuClose();
-          break;
-      }
+      setTimeout(() => {
+        switch (this.state) {
+          case true:
+            this.menuOpen();
+            break;
+          case false:
+            this.menuClose();
+            break;
+        }
+      }, 100);
+
     }
   }
 
+  // Open menu.
   menuOpen() {
-    this.Menu.el.className = 'Menu isOpen';
+    this.el.className = 'Menu isOpen';
   }
 
+  // Close menu.
   menuClose() {
-    this.Menu.el.className = 'Menu';
+    this.el.className = 'Menu';
   }
 }
 
-const header = new Header();
+new Menu();
 
+class Language {
+
+  constructor() {
+    // Store the current language. Default to true;
+    this.currentLanguage = 'he';
+    this.languageMenu = document.body.querySelector('.Language');
+
+    this.languageMenu.addEventListener('change', e => {
+      setTimeout(() => {
+        switch (e.target.value.toLowerCase()) {
+          case 'en':
+            this.currentLanguage = 'en';
+            break;
+          case 'עבר':
+            this.currentLanguage = 'he';
+            break;
+        }
+      }, 100);
+    });
+  }
+}
+
+new Language();
 export default null;

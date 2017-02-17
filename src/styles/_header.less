@@ -24,6 +24,7 @@
   @animationSpeed : 200ms;
   @menuWidth : 200px;
 
+  // General menu rules.
   position: relative;
   cursor: pointer;
   flex-shrink:1 ;
@@ -32,7 +33,7 @@
   height: 45px;
   text-align: center;
 
-
+  // Menu icon.
   &:before {
     content: '';
     width: 20px;
@@ -42,26 +43,28 @@
     box-shadow: 0 6px @primary-crimson, 0 12px @primary-crimson ;
   }
 
+  // Drop down itself.
   &-frame {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
+  // Open state.
   &.isOpen {
     .Menu-frame {
       left: -5px;
       box-shadow: 5px 6px 10px -4px rgba(0,0,0,.7);
 
+      // Menu overlay shadow.
       &:before {
         content: '';
         position: absolute;
         top: 0;
         left: @menuWidth;
-        width: 1000px;
+        width: 5000px;
         height: 100vh;
         background: rgba(0,0,0,.3);
-        opacity: 1;
       }
     }
   }
@@ -78,11 +81,6 @@
 
     li {
       padding-bottom: .5em;
-    }
-
-    &:before {
-      opacity: 0;
-      transition: opacity @animationSpeed ease-in-out;
     }
   }
 }
