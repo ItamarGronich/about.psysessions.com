@@ -3,8 +3,11 @@
  *=================================
  */
 
+// General settings:
+@headerSize: 49px;
+
 .Header {
-  height: 49px;
+  height: @headerSize;
   padding: 2px;
   display: flex;
   width: 100%;
@@ -110,4 +113,8 @@
   h1 {
     margin: 0;
   }
+}
+
+.headerSpace {
+  height: @headerSize;
 }

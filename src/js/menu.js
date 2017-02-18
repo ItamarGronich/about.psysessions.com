@@ -34,28 +34,4 @@ class Menu {
 }
 
 new Menu();
-
-class Language {
-
-  constructor() {
-    // Store the current language. Default to true;
-    this.currentLanguage = 'he';
-    this.languageMenu = document.body.querySelector('.Language');
-
-    this.languageMenu.addEventListener('change', e => {
-      setTimeout(() => {
-        switch (e.target.value.toLowerCase()) {
-          case 'en':
-            this.currentLanguage = 'en';
-            break;
-          case 'עבר':
-            this.currentLanguage = 'he';
-            break;
-        }
-      }, 100);
-    });
-  }
-}
-
-new Language();
 export default null;
