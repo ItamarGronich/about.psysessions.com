@@ -7,6 +7,7 @@ class Language {
     this.currentLanguage = 'he';
     this.languageMenu = document.body.querySelector('.Language');
 
+    this.assignClass();
 
     this.languageMenu.addEventListener('change', e => {
       setTimeout(() => {
@@ -21,6 +22,7 @@ class Language {
         }
 
         this.translate();
+        this.assignClass();
       }, 100);
     });
   }
@@ -29,6 +31,18 @@ class Language {
     this
       .getAllTranslateables()
       .forEach(e => e.textContent = this.getTranslation(e.dataset.t)[this.currentLanguage]);
+  }
+
+  assignClass() {
+    let body = document.querySelector('body');
+    switch (this.currentLanguage) {
+      case 'en':
+        body.className = '';
+        break;
+      case 'he':
+        body.className = 'Rtl';
+        break;
+    }
   }
 
   getTranslation(namespace) {
@@ -44,6 +58,8 @@ class Language {
   }
 }
 
-new Language().translate();
+window.onload = () => {
+  new Language().translate();
+};
 
 export default null;
