@@ -80,13 +80,31 @@
     top: 45px;
     left: -@menuWidth;
     padding: 2em 3em;
-    transition: left @animationSpeed ease-in-out;
+    transition: all @animationSpeed ease-in-out;
 
     li {
       padding-bottom: .5em;
     }
   }
+
+  // Adjustments for rtl.
+  .Rtl & {
+    .Menu-frame {
+      right: -@menuWidth;
+      transition: ;
+    }
+
+    &.isOpen .Menu-frame {
+      right: -5px;
+      box-shadow: -5px 6px 10px -4px rgba(0,0,0,.7);
+
+      &:before {
+        left: -5000px;
+      }
+    }
+  }
 }
+
 
 /*=================================
  * Language
