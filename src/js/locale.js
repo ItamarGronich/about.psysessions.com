@@ -5,6 +5,10 @@ const
         SUBSCRIBE: {
           en: 'Subscribe',
           he: 'הרשם'
+        },
+        SEND: {
+          en: 'Send',
+          he: 'שלח'
         }
       },
       MENU: {
@@ -123,6 +127,66 @@ const
             he: 'לא!!! בהנחה שהמטופל שלך הסכים שישלחו לו תזכורות, ברגע שהגדרת לו תזכורת היא פשוט תגיע לו למייל. הוא לא צריך לעשות שום דבר נוסף'
           },
         },
+      },
+      SUBSCRIBE: {
+        HEADER:{
+          en: 'Stay up to date',
+          he: 'השאר מעודכן'
+        },
+        SUB_HEADER:{
+          en: 'Subscribe to our newsletter',
+          he: 'הרשם לניוזלטר שלנו'
+        }
+      },
+      GET_IN_TOUCH: {
+        HEADER:{
+          en: 'Get in touch',
+          he: 'פנה אלינו'
+        },
+        TEXT:{
+          en: 'We’re happy to hear from you! Contact us today and speak with one of our customer service representatives — and make your experience with us that much more pleasant!',
+          he: 'אנו שמחים לשמוע ממך! פנה אלינו עוד היום ולדבר עם אחד מנציגי שירות הלקוחות שלנו - ולהפוך את החוויה שלך איתנו להרבה יותר נעימה!'
+        },
+        DETAILS: {
+          en: 'dror.....',
+          he: 'דרור'
+        },
+        FORM: {
+          NAME: {
+            en: 'Name',
+            he: 'שם'
+          },
+          EMAIL: {
+            en: 'Email',
+            he: 'אימייל'
+          },
+          SUBJECT: {
+            en: 'Subject',
+            he: 'נושא'
+          },
+          PHONE: {
+            en: 'Phone',
+            he: 'טלפון'
+          },
+          ADDRESS: {
+            en: 'Address',
+            he: 'כתובת'
+          },
+          MESSAGE: {
+            en: 'Message',
+            he: 'הודעה'
+          }
+        }
+      },
+      FOOTER: {
+        DETAILS: {
+          en: `dror.gronich@gmail.com | +972556600420 | Israel`,
+          he: `dror.gronich@gmail.com | +972556600420 | ישראל`
+        },
+        BOTTOM: {
+          en: '©2017 by resonators platform on www.PsySession.com',
+          he: '©2017 מערכת הרזונטורז על www.PsySession.com'
+        }
       }
     };
 

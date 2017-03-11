@@ -108,11 +108,69 @@
 			</div>
 		</section>
 
-        <!--    Get in touch    -->
-        <section>צור קשר</section>
+        <!--    Stay up to date    -->
+        <section>
+			<div class="container">
+				<h3 data-t="SUBSCRIBE.HEADER"></h3>
+				<h4 data-t="SUBSCRIBE.SUB_HEADER"></h4>
+				<fieldset>
+					<form action="">
+						<label>
+							E-Mail
+							<input type="text">
+						</label>
+						<p class="BtnPrimary">
+							<a type="submit" data-t="GENERAL.SUBSCRIBE"></a>
+						</p>
+					</form>
+				</fieldset>
+			</div>
+		</section>
+
+		<!--    Get in touch    -->
+        <section>
+			<div class="container">
+				<article>
+					<h3 data-t="GET_IN_TOUCH.HEADER"></h3>
+					<p data-t="GET_IN_TOUCH.TEXT"></p>
+					<p data-t="GET_IN_TOUCH.DETAILS"></p>
+					<p></p>
+				</article>
+				<form action="" id="get-in-touch" method="POST">
+
+					<label for="git-name" data-t="GET_IN_TOUCH.FORM.NAME"></label>
+					<input type="text" id="git-name">
+
+					<label for="git-email" data-t="GET_IN_TOUCH.FORM.EMAIL"></label>
+					<input type="text" id="git-email">
+
+					<label for="git-subject" data-t="GET_IN_TOUCH.FORM.SUBJECT"></label>
+					<input type="text" id="git-subject">
+
+					<label for="git-phone" data-t="GET_IN_TOUCH.FORM.PHONE"></label>
+					<input type="text" id="git-phone">
+
+					<label for="git-address" data-t="GET_IN_TOUCH.FORM.ADDRESS"></label>
+					<input type="text" id="git-address">
+
+					<label for="git-message" data-t="GET_IN_TOUCH.FORM.MESSAGE"></label>
+					<textarea name="" id="git-message" cols="30" rows="10"></textarea>
+
+					<p class="BtnPrimary">
+						<a href="" data-t="GENERAL.SEND"></a>
+					</p>
+				</form>
+			</div>
+		</section>
 
         <!--    Footer  -->
-        <footer>זכויות יוצרים</footer>
+        <footer class="Footer">
+			<div class="container">
+				<p data-t="FOOTER.DETAILS"></p>
+				<nav class="social"></nav>
+				<p class="Footer-subFooter" data-t="FOOTER.BOTTOM"></p>
+			</div>
+		</footer>
 
         <script src="bundle.js"></script>
     </body>
