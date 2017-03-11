@@ -78,7 +78,9 @@
     width: @menuWidth;
     background: white;
     top: 45px;
-    left: -@menuWidth;
+
+    // Dunno why this is needed but it is.
+    left: -(@menuWidth + 2);
     padding: 2em 3em;
     transition: all @animationSpeed ease-in-out;
 
@@ -90,7 +92,8 @@
   // Adjustments for rtl.
   .Rtl & {
     .Menu-frame {
-      right: -@menuWidth;
+      // Dunno why this is needed but it is.
+      right: -(@menuWidth + 2);
     }
 
     &.isOpen .Menu-frame {
