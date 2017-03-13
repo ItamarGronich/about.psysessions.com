@@ -10,7 +10,13 @@ const
   source      = require('vinyl-source-stream'),
   gutil       = require('gulp-util'),
   buffer      = require('vinyl-buffer'),
-  uglify      = require('gulp-uglify');
+  uglify      = require('gulp-uglify'),
+  ghPages     = require('gulp-gh-pages'),
+  inline      = require('gulp-inline-source'),
+  htmlMin     = require('gulp-htmlmin'),
+  revAll      = require('gulp-rev-all'),
+  del         = require('del'),
+  rename      = require('gulp-rename');
 
   // Paths to the different sources and destinations.
   sources = {
@@ -18,7 +24,8 @@ const
     js: 'src/js/',
     html: 'src/index.html',
     assets: 'img/pageAssets/',
-    dist: 'dist/'
+    dist: 'dist/',
+    build: 'build/'
   };
 
 // Lets bring es6 to es5 with this.
@@ -69,8 +76,11 @@ gulp.task('html', function () {
     .pipe(gulp.dest(sources.dist))
 });
 
+// Transpile, Compress and copy all sources to dist folder.
+gulp.task('build', ['less', 'html', 'assets', 'es6']);
+
 // Static Server + watching less/html files
-gulp.task('serve', ['less', 'html', 'assets', 'es6'], function() {
+gulp.task('serve', ['build'], function() {
 
   browserSync.init({
     server: "./dist"
@@ -84,3 +94,35 @@ gulp.task('serve', ['less', 'html', 'assets', 'es6'], function() {
 
 // Default task.
 gulp.task('default', ['serve']);
+
+gulp.task('bundle-all', ['build', 'clean:build'],
+  () =>
+    gulp
+      .src(sources.dist + 'index.html')
+      .pipe(plumber())
+      .pipe(inline())
+      .pipe(htmlMin({
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        html5: true,
+        keepClosingSlash: true,
+        preventAttributesEscaping: true,
+        removeComments: true,
+        removeTagWhitespace: true,
+        sortAttributes: true,
+        sortClassName: true
+      }))
+      .pipe(revAll.revision())
+      .pipe(plumber.stop())
+      .pipe(gulp.dest(sources.build))
+);
+
+// Clean build directory.
+gulp.task('clean:build', () => del(sources.build + '**/*.*'));
+
+gulp.task('deploy:gh-pages', ['bundle-all'],
+  () =>
+    gulp.src(sources.build + '/*.html')
+      .pipe(rename('index.html'))
+      .pipe(ghPages())
+);
