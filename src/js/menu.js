@@ -1,4 +1,4 @@
-class Menu {
+export default class Menu {
 
   constructor() {
     this.state =  false;
@@ -32,6 +32,3 @@ class Menu {
     this.el.className = 'Menu';
   }
 }
-
-new Menu();
-export default null;

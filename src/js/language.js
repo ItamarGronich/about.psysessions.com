@@ -1,6 +1,7 @@
 import locale from './locale.js';
 
-class Language {
+
+export default class Language {
 
   constructor() {
     // Store the current language. Default to true;
@@ -57,9 +58,3 @@ class Language {
       .querySelectorAll('[data-t]');
   }
 }
-
-window.onload = () => {
-  new Language().translate();
-};
-
-export default null;
