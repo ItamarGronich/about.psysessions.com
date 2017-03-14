@@ -2,9 +2,8 @@ import Menu from './menu.js';
 import Language from './language.js';
 
 
+// HTML fully parsed. Dom now safely editable.
 document.addEventListener('DOMContentLoaded', () => {
-
-  // HTML fully parsed. Dom now safely editable.
 
   // Enable language support. Translate page.
   new Language().translate();
@@ -14,9 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Fire when window loads
+// Fire when window loads. Page fully loaded.
 window.onload = () => {
-
-  // Page fully loaded.
 
 };
