@@ -21,11 +21,11 @@ const
   // Paths to the different sources and destinations.
   sources = {
     styles: 'src/styles',
-    js: 'src/js/',
-    html: 'src/index.html',
+        js: 'src/js/',
+      html: 'src/index.html',
     assets: 'img/pageAssets/',
-    dist: 'dist/',
-    build: 'build/'
+      dist: 'dist/',
+     build: 'build/'
   };
 
 // Lets bring es6 to es5 with this.
@@ -34,11 +34,12 @@ const
 // into one file. can have plugins.
 // Babelify - a babel plugin for browserify, to make browserify
 // handle es6 including imports.
-gulp.task('es6', function() {
-  return browserify({
-    entries: sources.js + 'main.js',
-    debug: true
-  })
+gulp.task('es6',
+  () =>
+    browserify({
+      entries: sources.js + 'main.js',
+      debug: true
+    })
     .transform("babelify", { presets: ['es2015'] })
     .on('error',gutil.log)
     .bundle()
@@ -49,26 +50,28 @@ gulp.task('es6', function() {
     .pipe(sourceMaps.init())
     .pipe(uglify())
     .pipe(sourceMaps.write('./maps'))
-    .pipe(gulp.dest(sources.dist));
-});
+    .pipe(gulp.dest(sources.dist))
+);
 
 // Styles.
-gulp.task('less', function () {
-  return gulp.src(sources.styles + '/style.less')
-    .pipe(sourceMaps.init())
-    .pipe(plumber())
-    .pipe(less())
-    .pipe(minCss())
-    .pipe(sourceMaps.write('./maps'))
-    .pipe(gulp.dest(sources.dist))
-    .pipe(browserSync.stream());
-});
+gulp.task('less',
+  () =>
+    gulp.src(sources.styles + '/style.less')
+      .pipe(sourceMaps.init())
+      .pipe(plumber())
+      .pipe(less())
+      .pipe(minCss())
+      .pipe(sourceMaps.write('./maps'))
+      .pipe(gulp.dest(sources.dist))
+      .pipe(browserSync.stream())
+);
 
 // Assets.
-gulp.task('assets', function () {
-  return gulp.src([sources.assets + '**/*.png', sources.assets + '**/*.ico'])
-    .pipe(gulp.dest(sources.dist))
-});
+gulp.task('assets',
+  () =>
+    gulp.src([sources.assets + '**/*.png', sources.assets + '**/*.ico'])
+      .pipe(gulp.dest(sources.dist))
+);
 
 // HTML.
 gulp.task('html', function () {
@@ -95,7 +98,7 @@ gulp.task('serve', ['build'], function() {
 // Default task.
 gulp.task('default', ['serve']);
 
-gulp.task('bundle-all', ['build', 'clean:build'],
+gulp.task('build:prod', ['build', 'clean:build'],
   () =>
     gulp
       .src(sources.dist + 'index.html')
@@ -120,7 +123,7 @@ gulp.task('bundle-all', ['build', 'clean:build'],
 // Clean build directory.
 gulp.task('clean:build', () => del(sources.build + '**/*.*'));
 
-gulp.task('deploy:gh-pages', ['bundle-all'],
+gulp.task('deploy:gh-pages', ['build:prod'],
   () =>
     gulp.src(sources.build + '/*.html')
       .pipe(rename('index.html'))
