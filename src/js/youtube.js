@@ -7,6 +7,9 @@ export default class Youtube {
       Array
         .from(document.querySelectorAll('.Youtube'))
         .filter(video => video.dataset.videoId);
+
+    this.attachListener();
+    this.generateImages();
   }
 
   generateImages() {
@@ -21,19 +24,43 @@ export default class Youtube {
 
   attachListener() {
     document.addEventListener('click', e => this.loadVideo(this.videos.filter(vid => e.target === vid)));
-    return this;
   }
 
   loadVideo(video) {
     video.forEach(
-      vid =>
+      vid => {
+        const
+          iframe   = document.createElement('iframe'),
+          videoId  = iframe.dataset.videoId,
+          protocol = window.location.protocol,
+          domain   = 'www.youtube.com/embed',
+          params   = [
+            'wmode=transparent', 
+            'autoplay=1',
+            'theme=dark', 
+            'controls=1', 
+            'autohide=0', 
+            'loop=0', 
+            'showinfo=0', 
+            'rel=0', 
+            'playlist=false', 
+            'enablejsapi=0'
+          ];
+
+        // Set video source.
+        iframe.setAttribute('src', `${protocol}://${domain}/${videoId}?${params.join('&')}`);
+
+        // Set height and width.
+        ['height', 'width'].forEach( att => iframe.setAttribute( att, '100%'));
+
+        // Allow full screen.
+        iframe.setAttribute('allowfullscreen', '');
+
+        // No frame border.
+        iframe.setAttribute('frameborder', '0');
+
         vid
-          .appendChild(document.createElement('iframe')
-          .setAttribute('src', `${window.location.protocol}://www.youtube.com/embed/${video.dataset[0]}/?wmode=transparent&autoplay=0&theme=dark&controls=1&autohide=0&loop=0&showinfo=0&rel=0&playlist=false&enablejsapi=0`))
-    );
-  }
-
-  playVideo() {
-
+          .appendChild(iframe);
+      });
   }
 }
