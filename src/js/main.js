@@ -1,5 +1,6 @@
 import Menu from './menu.js';
 import Language from './language.js';
+import Youtube from './youtube.js';
 
 
 // HTML fully parsed. Dom now safely editable.
@@ -10,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initiate Menu.
   new Menu();
+
+  // Initiate Youtube handler module.
+  new Youtube();
 
 });
 

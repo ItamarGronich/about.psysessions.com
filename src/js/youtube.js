@@ -17,6 +17,22 @@ export default class Youtube {
 
     // Generate img thumbs.
     this.generateImages();
+
+
+    this.protocol = window.location.protocol;
+    this.domain   = 'www.youtube.com/embed';
+    this.params   = [
+      'wmode=transparent',
+      'autoplay=1',
+      'theme=dark',
+      'controls=1',
+      'autohide=0',
+      'loop=0',
+      'showinfo=0',
+      'rel=0',
+      'playlist=false',
+      'enablejsapi=0'
+    ];
   }
 
   /**
@@ -28,7 +44,7 @@ export default class Youtube {
 
       // Append image when it finished loading.
       img.addEventListener('load', () => video.appendChild(img));
-      img.src = `https://img.youtube.com/vi/${video.dataset.videoId}/sddefault.jpg`
+      img.src = `${this.protocol}://img.youtube.com/vi/${video.dataset.videoId}/sddefault.jpg`
     })
   }
 
@@ -49,24 +65,10 @@ export default class Youtube {
       vid => {
         const
           iframe   = document.createElement('iframe'),
-          videoId  = iframe.dataset.videoId,
-          protocol = window.location.protocol,
-          domain   = 'www.youtube.com/embed',
-          params   = [
-            'wmode=transparent', 
-            'autoplay=1',
-            'theme=dark', 
-            'controls=1', 
-            'autohide=0', 
-            'loop=0', 
-            'showinfo=0', 
-            'rel=0', 
-            'playlist=false', 
-            'enablejsapi=0'
-          ];
+          videoId  = iframe.dataset.videoId;
 
         // Set video source.
-        iframe.setAttribute('src', `${protocol}://${domain}/${videoId}?${params.join('&')}`);
+        iframe.setAttribute('src', `${this.protocol}://${this.domain}/${videoId}?${this.params.join('&')}`);
 
         // Set height and width.
         ['height', 'width'].forEach( att => iframe.setAttribute( att, '100%'));
