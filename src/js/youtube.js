@@ -1,5 +1,9 @@
 export default class Youtube {
 
+
+  /**
+   * Get videos, attach listeners and generate images.
+   */
   constructor() {
 
     // Get videos array.
@@ -8,24 +12,38 @@ export default class Youtube {
         .from(document.querySelectorAll('.Youtube'))
         .filter(video => video.dataset.videoId);
 
+    // Attaches an event listener to the DOM root.
     this.attachListener();
+
+    // Generate img thumbs.
     this.generateImages();
   }
 
+  /**
+   * Generate thumbnails for un-played videos.
+   */
   generateImages() {
     this.videos.forEach(video => {
       const img = new Image();
+
+      // Append image when it finished loading.
       img.addEventListener('load', () => video.appendChild(img));
       img.src = `https://img.youtube.com/vi/${video.dataset.videoId}/sddefault.jpg`
-    });
-
-    return this;
+    })
   }
 
+
+  /**
+   * Attaches a listener to the DOM root that fires the load video on videos that have been clicked.
+   */
   attachListener() {
     document.addEventListener('click', e => this.loadVideo(this.videos.filter(vid => e.target === vid)));
   }
 
+  /**
+   * Load the video iframe with all the necessary options.
+   * @param {Element} video - HTML element of that the iframe will be embedded in.
+   */
   loadVideo(video) {
     video.forEach(
       vid => {
@@ -60,6 +78,7 @@ export default class Youtube {
         iframe.setAttribute('frameborder', '0');
 
         vid
+        // Append iframe to html element.
           .appendChild(iframe);
       });
   }
