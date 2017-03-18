@@ -4,7 +4,12 @@ const
   browserSync = require('browser-sync'),
   sourceMaps  = require('gulp-sourcemaps'),
   minCss      = require('gulp-clean-css'),
-  plumber     = require('gulp-plumber'),
+  plumberU    = require('gulp-plumber'),
+  handleErr   = function(err) {
+    console.log(err);
+    this.emit('end');
+  },
+  plumber     = () => plumberU({errorHandler: handleErr}),
   browserify  = require('browserify'),
   babelify    = require('babelify'),
   source      = require('vinyl-source-stream'),
