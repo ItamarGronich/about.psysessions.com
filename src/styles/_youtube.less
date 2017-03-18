@@ -1,0 +1,14 @@
+/* =============================
+        Youtube video embed
+   =============================*/
+
+.Youtube {
+  background: @primary-black;
+  position: relative;
+
+  &:after {
+    content: '';
+
+    &:extend([class='16:9']);
+  }
+}
