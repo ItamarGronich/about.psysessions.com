@@ -6,7 +6,27 @@
   background: @primary-black;
   position: relative;
 
+  // Dunno why this is needed yet but it
+  // prevents the videos from covering the header.
   z-index: -100;
+
+  // Youtube play button.
+  &:before {
+    &:extend(.absoluteCenter);
+    width: 90px;
+    height: 60px;
+    background-color: #333;
+    box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
+    opacity: 0.8;
+    border-radius: 6px;
+    font-size: 40px;
+    color: white;
+    content: "▶";
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  // Keep aspect ratio.
   &:after {
     content: '';
 
