@@ -1,3 +1,5 @@
+import Utils from './utils';
+
 export default class Youtube {
 
 
@@ -58,26 +60,21 @@ export default class Youtube {
    */
   loadVideo(videos) {
     videos.forEach(
-      vid => {
-        const
-          iframe   = document.createElement('iframe'),
-          videoId  = vid.dataset.videoId;
-
-        // Set video source.
-        iframe.setAttribute('src', `${this.protocol}//${this.domain}/${videoId}?${this.params.join('&')}`);
-
-        // Set height and width.
-        ['height', 'width'].forEach( att => iframe.setAttribute( att, '100%'));
-
-        // Allow full screen.
-        iframe.setAttribute('allowfullscreen', '');
-
-        // No frame border.
-        iframe.setAttribute('frameborder', '0');
-
+      vid =>
         vid
+
         // Append iframe to html element.
-          .appendChild(iframe);
-      });
+          .appendChild(
+            Utils.htmlSetAttibutes(document.createElement('iframe'), {
+              src: `${this.protocol}//${this.domain}/${vid.dataset.videoId}?${this.params.join('&')}`,
+              height: '100%',
+              width: '100%',
+              allowfullscreen: '',
+              frameborder: '0',
+            })
+          )
+          .parentNode
+          .classList.add('embedded')
+      );
   }
 }

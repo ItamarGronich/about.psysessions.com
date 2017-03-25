@@ -6,23 +6,6 @@
   background: @primary-black;
   position: relative;
 
-  // Youtube play button.
-  &:before {
-    &:extend(.absoluteCenter);
-    width: 90px;
-    height: 60px;
-    background-color: #333;
-    box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
-    opacity: 0.8;
-    border-radius: 6px;
-    // White arrow
-    font-size: 40px;
-    color: @primary-white;
-    content: "▶";
-    line-height: 55px;
-    text-align: center;
-  }
-
   // Keep aspect ratio.
   &:after {
     content: '';
@@ -30,11 +13,40 @@
     &:extend([class='16:9']);
   }
 
-  &:hover {
-    cursor: pointer;
+  // Only when video is not yet embedded.
+  &:not(.embedded) {
 
+    // Youtube play button.
     &:before {
-      background-color: @red-basic;
+      &:extend(.absoluteCenter);
+      width: 90px;
+      height: 60px;
+      background-color: #333;
+      box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
+      opacity: 0.8;
+      border-radius: 6px;
+      // White arrow
+      font-size: 40px;
+      color: @primary-white;
+      content: "▶";
+      line-height: 55px;
+      text-align: center;
     }
+
+    &:hover {
+      cursor: pointer;
+
+      &:before {
+        background-color: @red-basic;
+      }
+    }
+  }
+
+  iframe {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
   }
 }
