@@ -6,10 +6,6 @@
   background: @primary-black;
   position: relative;
 
-  // Dunno why this is needed yet but it
-  // prevents the videos from covering the header.
-  z-index: -100;
-
   // Youtube play button.
   &:before {
     &:extend(.absoluteCenter);
@@ -19,10 +15,11 @@
     box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
     opacity: 0.8;
     border-radius: 6px;
+    // White arrow
     font-size: 40px;
-    color: white;
+    color: @primary-white;
     content: "▶";
-    vertical-align: middle;
+    line-height: 55px;
     text-align: center;
   }
 
@@ -31,5 +28,13 @@
     content: '';
 
     &:extend([class='16:9']);
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    &:before {
+      background-color: @red-basic;
+    }
   }
 }
